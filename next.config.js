@@ -2,6 +2,24 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-}
+  images: {
+    domains: ["raw.githubusercontent.com"],
+  },
+};
 
-module.exports = nextConfig
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "max-age=5",
+          },
+        ],
+      },
+    ];
+  },
+  ...nextConfig,
+};
