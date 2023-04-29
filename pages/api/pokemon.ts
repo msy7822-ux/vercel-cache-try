@@ -1,18 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-
-type Data = {
-  name: string;
-};
+import { fetchPokemonImg } from "../../lib/pokemon/fetchImg";
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
-  const fetchPokemon = await fetch(
-    process.env.NEXT_PUBLIC_POKEMON_API_BASE_URL ?? ""
-  );
+  const id = req.query.id ? parseInt(req.query.id as string, 10) : 1;
+  const pokemonImgUrl = await fetchPokemonImg(id);
 
-  console.log(fetchPokemon);
-  res.status(200).json({ name: "John Doe" });
+  res.status(200).json({ img: pokemonImgUrl });
 }
