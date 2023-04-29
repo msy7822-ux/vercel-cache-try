@@ -5,11 +5,11 @@ type Data = {
   name: string;
 };
 
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const fetchPokemon = fetch(
+  const fetchPokemon = await fetch(
     process.env.NEXT_PUBLIC_POKEMON_API_BASE_URL ?? ""
   );
 
