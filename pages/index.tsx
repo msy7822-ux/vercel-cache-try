@@ -1,26 +1,23 @@
 import type { NextPage, GetStaticProps } from "next";
 import Head from "next/head";
-import { fetchPokemonImg } from "../lib/pokemon/fetchImg";
 import Image from "next/image";
 
 export const getStaticProps: GetStaticProps = async () => {
-  const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const id = Math.floor(Math.random() * ids.length);
-
-  const pokemonImgUrl = await fetchPokemonImg(id).catch(
-    async () => await fetchPokemonImg(id)
-  );
+  const res = await fetch("http://localhost:3000/api/pokemon");
+  const pokemonImgUrl = await res.json();
 
   return {
     props: {
       pokemonImgUrl,
     },
-    revalidate: 10, // 👈 ポイント
+    revalidate: 10,
   };
 };
 
 type Props = {
-  pokemonImgUrl: string;
+  pokemonImgUrl: {
+    img: string;
+  };
 };
 
 const Home: NextPage<Props> = ({ pokemonImgUrl }) => {
@@ -29,7 +26,7 @@ const Home: NextPage<Props> = ({ pokemonImgUrl }) => {
       <Head>
         <title>Index Page</title>
       </Head>
-      <Image src={pokemonImgUrl} alt="pokemon" width={200} height={200} />
+      <Image src={pokemonImgUrl.img} alt="pokemon" width={200} height={200} />
       <main>
         <h1>ここはトップページです</h1>
       </main>
