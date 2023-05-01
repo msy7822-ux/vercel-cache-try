@@ -14,5 +14,12 @@ export default async function handler(
 
   const pokemonImgUrl = await fetchPokemonImg(id);
 
-  res.status(200).json({ img: pokemonImgUrl });
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=86400"
+  );
+
+  res
+    .status(200)
+    .json({ img: pokemonImgUrl, timestamp: new Date().toISOString() });
 }
