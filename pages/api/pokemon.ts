@@ -7,11 +7,10 @@ export default async function handler(
   res: NextApiResponse
 ) {
   let id = 1;
+  id = Math.floor(Math.random() * 2);
+  console.log(id);
 
-  setInterval(function () {
-    const ids = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    id = Math.floor(Math.random() * ids.length);
-  }, 5000);
+  id = id === 0 ? 1 : 2;
 
   const pokemonImgUrl = await fetchPokemonImg(id);
 
