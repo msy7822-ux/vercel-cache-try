@@ -27,9 +27,6 @@ const Home: NextPage<Props> = ({ pokemonImgUrl }) => {
         <title>Index Page</title>
       </Head>
       <Image src={pokemonImgUrl.img} alt="pokemon" width={200} height={200} />
-      <main>
-        <h1>ここはトップページです</h1>
-      </main>
     </div>
   );
 };
