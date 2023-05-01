@@ -14,10 +14,10 @@ export default async function handler(
 
   const pokemonImgUrl = await fetchPokemonImg(id);
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=10, stale-while-revalidate=86400"
-  );
+  // res.setHeader(
+  //   "Cache-Control",
+  //   "public, s-maxage=10, stale-while-revalidate=86400"
+  // );
 
   res
     .status(200)

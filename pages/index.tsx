@@ -9,7 +9,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       response,
     },
-
     revalidate: 10,
   };
 };
